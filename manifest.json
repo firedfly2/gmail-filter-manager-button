@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Gmail Filters List Button",
-  "version": "0.2.2",
-  "description": "Gmailのツールバーにフィルタ管理ボタンを追加するだけのシンプルな拡張機能です。ボタン押下でフィルタ管理画面に遷移します。",
+  "name": "__MSG_extension_name__",
+  "version": "0.2.3",
+  "description": "__MSG_extension_description__",
   "icons": {
     "16": "icons/filter_16.png",
     "32": "icons/filter_32.png",
@@ -24,5 +24,6 @@
       "all_frames": false
     }
   ],
-  "permissions": []
+  "permissions": [],
+  "default_locale": "en"
 }

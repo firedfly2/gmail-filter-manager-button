@@ -1,0 +1,14 @@
+{
+  "extension_name": {
+    "message": "Gmail フィルタ一覧ボタン"
+  },
+  "extension_description": {
+    "message": "Gmailのツールバーにフィルタ管理ボタンを追加するだけのシンプルな拡張機能です。ボタン押下でフィルタ管理画面に遷移します。"
+  },
+  "open_filters_button_label": {
+    "message": "フィルタ一覧を開く"
+  },
+  "open_filters_tooltip": {
+    "message": "Gmail のフィルタ設定を開く"
+  }
+}

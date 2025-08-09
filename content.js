@@ -1,3 +1,6 @@
+/* i18n injected */
+const __LBL = chrome.i18n.getMessage('open_filters_button_label') || 'Open Filters';
+const __TIP = chrome.i18n.getMessage('open_filters_tooltip') || 'Open Gmail filter settings';
 (() => {
   const BTN_ID = "arc-filters-button";
 
