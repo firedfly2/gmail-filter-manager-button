@@ -1,0 +1,40 @@
+/* Base: minimal. Keep native Gmail sizing. */
+#arc-filters-button.arc-filter-btn{
+  position: relative;
+  aspect-ratio: 1 / 1;            /* ensure circular hover background */
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Neutralize text-button sizing Gmail can apply on hover/active */
+#arc-filters-button.T-I-KE,
+#arc-filters-button.T-I-JW,
+#arc-filters-button.T-I-KE.T-I-JW{
+  min-width: 0 !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  transform: none !important;
+  outline: none !important;
+}
+
+/* Absolute-center the icon so hover circle doesn't shift it */
+#arc-filters-button .asa { position: static; }
+#arc-filters-button .arc-filter-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px; height: 20px;
+  display: inline-block;
+}
+
+/* Darker default color so the outline icon doesn't look faint */
+#arc-filters-button.arc-filter-btn { color: #202124; }         /* normal */
+#arc-filters-button.T-I-JW { color: #111111; }                 /* hover */
+
+@media (prefers-color-scheme: dark) {
+  #arc-filters-button.arc-filter-btn { color: #e8eaed; }
+  #arc-filters-button.T-I-JW { color: #ffffff; }
+}
