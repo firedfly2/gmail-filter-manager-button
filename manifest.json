@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Gmail Filter Manager Button",
-  "version": "0.2.4",
-  "description": "Add a Filter Manager button to Gmail's toolbar",
+  "name": "Gmail Filter Settings Button",
+  "version": "0.2.5",
+  "description": "Add a Filter Settings button to Gmail's toolbar",
   "icons": {
     "16": "icons/filter_16.png",
     "32": "icons/filter_32.png",
