@@ -1,6 +1,6 @@
 {
   "extension_name": {
-    "message": "Gmail フィルタ設定ボタン"
+    "message": "Gmailフィルタ設定ボタン"
   },
   "extension_description": {
     "message": "Gmailのツールバーにフィルタ管理ボタンを追加するだけのシンプルな拡張機能です。ボタン押下でフィルタ設定画面を開きます。"
