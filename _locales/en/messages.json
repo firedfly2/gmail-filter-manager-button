@@ -1,9 +1,9 @@
 {
   "extension_name": {
-    "message": "Gmail Filters List Button"
+    "message": "Gmail Filter Manager Button"
   },
   "extension_description": {
-    "message": "Adds a button in Gmail to open the filter management page."
+    "message": "Adds a button in Gmail to open the filter manager page."
   },
   "open_filters_button_label": {
     "message": "Open Filters"
