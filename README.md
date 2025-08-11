@@ -6,7 +6,7 @@ Adds a **“Filters”** button to the Gmail toolbar. Click it to jump straight 
 
 ## Repository
 
-**GitHub:** https://github.com/firedfly2/gmail-filter-manager-button
+**GitHub:** [gmail-filter-manager-button](https://github.com/firedfly2/gmail-filter-manager-button)
 
 Clone with Git:
 ```bash
