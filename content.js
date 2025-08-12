@@ -101,9 +101,45 @@ const __TIP = chrome.i18n.getMessage('open_filters_tooltip') || 'Open Gmail filt
     return toolbar.querySelector(sel);
   }
 
+  function isVisible(el) {
+    if (!el) return false;
+    const style = getComputedStyle(el);
+    if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
+    const rects = el.getClientRects();
+    if (rects.length === 0) return false;
+    const r = rects[0];
+    return r.width > 0 && r.height > 0;
+  }
+
+  function getVisibleToolbar() {
+    const candidates = Array.from(document.querySelectorAll('div[gh="mtb"]'));
+    // Prefer visible ones; if multiple are visible, choose the last (most recently rendered)
+    const visibles = candidates.filter(isVisible);
+    if (visibles.length) return visibles[visibles.length - 1];
+    // Fallback to last candidate
+    return candidates[candidates.length - 1] || null;
+  }
+
   function insert() {
-    const toolbar = document.querySelector('div[gh="mtb"]');
-    if (!toolbar || document.getElementById(BTN_ID)) return;
+    const toolbar = getVisibleToolbar();
+    if (!toolbar) return;
+
+    const existing = document.getElementById(BTN_ID);
+    if (existing) {
+      // すでにボタンがあれば、現行ツールバー内にあるか確認。なければ移動、あればサイズだけ調整。
+      if (!toolbar.contains(existing)) {
+        const more = findMoreButton(toolbar);
+        if (more?.parentElement) {
+          more.parentElement.insertBefore(existing, more);
+        } else {
+          const groups = Array.from(toolbar.querySelectorAll(':scope > .G-Ni.J-J5-Ji'))
+            .filter(g => getComputedStyle(g).display !== "none");
+          (groups[groups.length - 1] || toolbar).appendChild(existing);
+        }
+      }
+      ensureSquare(existing);
+      return;
+    }
 
     const more = findMoreButton(toolbar);
     const btn = buildButton();
