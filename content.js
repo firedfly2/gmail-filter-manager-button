@@ -115,9 +115,9 @@ const __TIP = chrome.i18n.getMessage('open_filters_tooltip') || 'Open Gmail filt
     const candidates = Array.from(document.querySelectorAll('div[gh="mtb"]'));
     // Prefer visible ones; if multiple are visible, choose the last (most recently rendered)
     const visibles = candidates.filter(isVisible);
-    if (visibles.length) return visibles[visibles.length - 1];
-    // Fallback to last candidate
-    return candidates[candidates.length - 1] || null;
+  if (visibles.length) return visibles[visibles.length - 1];
+  // If none are visible yet, signal caller to wait
+  return null;
   }
 
   function insert() {
@@ -155,10 +155,18 @@ const __TIP = chrome.i18n.getMessage('open_filters_tooltip') || 'Open Gmail filt
   }
 
   function boot() {
+    // small scheduler to retry insertion shortly in case toolbar appears slightly later
+    let retryTimer = 0;
+    const scheduleRetry = () => {
+      if (retryTimer) return;
+      retryTimer = window.setTimeout(() => { retryTimer = 0; insert(); }, 150);
+    };
+
     insert();
-    const obs = new MutationObserver(() => { insert(); const b=document.getElementById(BTN_ID); if(b) ensureSquare(b);} );
+    const obs = new MutationObserver(() => { insert(); scheduleRetry(); const b=document.getElementById(BTN_ID); if(b) ensureSquare(b);} );
     obs.observe(document.body, { childList: true, subtree: true });
-    window.addEventListener("hashchange", insert, { passive: true });
+    window.addEventListener("hashchange", () => { insert(); scheduleRetry(); }, { passive: true });
+    window.addEventListener("popstate", () => { insert(); scheduleRetry(); }, { passive: true });
     window.addEventListener("resize", () => ensureSquare(document.getElementById(BTN_ID)), { passive: true });
   }
 
