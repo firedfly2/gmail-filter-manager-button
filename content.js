@@ -154,6 +154,16 @@ const __TIP = chrome.i18n.getMessage('open_filters_tooltip') || 'Open Gmail filt
     ensureSquare(btn);
   }
 
+  function handleHotkey(e) {
+    // Ctrl+Shift+F (Windows/Linux) or Cmd+Shift+F (Mac)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'f') {
+      // Prevent default browser behavior (like opening find dialog)
+      e.preventDefault();
+      e.stopPropagation();
+      toFilters(false);
+    }
+  }
+
   function boot() {
     // small scheduler to retry insertion shortly in case toolbar appears slightly later
     let retryTimer = 0;
@@ -168,6 +178,7 @@ const __TIP = chrome.i18n.getMessage('open_filters_tooltip') || 'Open Gmail filt
     window.addEventListener("hashchange", () => { insert(); scheduleRetry(); }, { passive: true });
     window.addEventListener("popstate", () => { insert(); scheduleRetry(); }, { passive: true });
     window.addEventListener("resize", () => ensureSquare(document.getElementById(BTN_ID)), { passive: true });
+    window.addEventListener("keydown", handleHotkey, { capture: true });
   }
 
   if (document.readyState === "loading") {
